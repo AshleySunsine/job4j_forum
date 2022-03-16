@@ -15,8 +15,6 @@ public class RegControl {
 
     @PostMapping("/reg")
     public String regSave(@ModelAttribute User user) {
-        user.setEnabled(true);
-        userRepository.save(user);
         return "redirect:/login";
     }
 

@@ -29,6 +29,11 @@
             <c:forEach items="${posts}" var="post">
                 <tr>
                     <td><c:out value="${post.name}"/></td>
+                    <td><c:out value="${post.description}"/>
+                        <span>
+             <a href="<c:url value='/update/${post.id}'/>">Редактировать пост</a>
+
+        </span></td>
                 </tr>
             </c:forEach>
             </tbody>
