@@ -4,14 +4,13 @@ import org.springframework.stereotype.Repository;
 import ru.job4j.forum.model.Post;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Repository
-public class PostRepository {
+public class PostRepositoryMem {
 
     private Map<Integer, Post> posts = new HashMap();
 
-    public PostRepository() {
+    public PostRepositoryMem() {
         posts.put(1, Post.of("1"));
         posts.put(2, Post.of("2"));
         posts.put(3, Post.of("3"));
@@ -27,7 +26,7 @@ public class PostRepository {
     }
 
     public Post save(Post post) {
-        posts.putIfAbsent(post.getId(), post);
+        posts.putIfAbsent((int) post.getId(), post);
         return post;
     }
 
@@ -35,11 +34,11 @@ public class PostRepository {
         return new ArrayList<>(posts.values());
     }
 
-    public Optional<Post> findById(int id) {
+    public Optional<Post> findById(long id) {
         return Optional.ofNullable(posts.get(id));
     }
 
-    public void deleteById(int id) {
+    public void deleteById(long id) {
         posts.remove(id);
     }
 }

@@ -15,35 +15,25 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <html>
 <head>
-    <title>Title</title>
+    <title>Create Post</title>
 </head>
 <body>
-<form name='setposts' action="<c:url value='/setposts/${post.id}'/>" method='GET'>
-<div style="margin-left:30px;">
-    <div class="row">
-        ID поста:
-        ${post.id}
-        <input type="hidden" class="form-control" id="postId" name="id" value="${post.id}">
-    </div>
+<form name='setposts' action="<c:url value='/create'/>" method='Post'>
+    <div style="margin-left:30px;">
+        <div class="col-md-6 mb-3">
+            <label for="postName">Имя поста:</label>
+            <input type="text" class="form-control" id="postName" name="name" required>
+        </div>
 
-    <div class="col-md-6 mb-3">
-        <label for="postName">Имя поста:</label>
-        <input type="text" class="form-control" id="postName" name="name" value="${post.name}" required>
-    </div>
-
-    <div class="col-md-6">
-        <label for="postDescript">Описание поста:</label>
-        <textarea class="form-control" id="postDescript" name="description" required>${post.description}
-        </textarea>
-        <div class="feedback">
-            Please enter a post description.
+        <div class="col-md-6">
+            <label for="postDescript">Описание поста:</label>
+            <textarea class="form-control" id="postDescript" name="description" required></textarea>
+            <div class="feedback">
+                Please enter a post description.
+            </div>
         </div>
     </div>
-</div>
     <button class="btn btn-primary" type="submit">Сохранить</button>
 </form>
-    <span>
-        <a href="<c:url value='/delete/${post.id}'/>">Удалить пост</a>
-    </span>
 </body>
 </html>

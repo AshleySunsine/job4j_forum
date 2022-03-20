@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.job4j.forum.model.Post;
-import ru.job4j.forum.repositories.PostRepository;
+import ru.job4j.forum.store.PostRepository;
 
 import java.util.Calendar;
 import java.util.List;
@@ -17,17 +17,19 @@ public class EditController {
     private PostRepository postRepository;
 
     @PostMapping("/create")
-    public String create(Model model) {
-        Post post = Post.of((String) model.getAttribute("postName"));
-        post.setId(Integer.parseInt((String) model.getAttribute("postId")));
-        post.setDescription((String) model.getAttribute("postDescript"));
-        post.setCreated((Calendar) model.getAttribute("postCreated"));
+    public String create(@ModelAttribute Post post) {
+        post.setCreated(Calendar.getInstance());
         postRepository.save(post);
         return "redirect:/index";
     }
 
+    @GetMapping("/createPost")
+    public String createReference() {
+        return "create";
+    }
+
     @GetMapping("/update/{id}")
-    public String update(@PathVariable int id, Model model) {
+    public String update(@PathVariable long id, Model model) {
         Post post = postRepository.findById(id).get();
         if (post == null) {
             return null;
@@ -38,26 +40,24 @@ public class EditController {
 
     @GetMapping("/posts")
     public List<Post> getAll() {
-        return postRepository.findAll();
+        return (List<Post>) postRepository.findAll();
     }
 
     @GetMapping("/posts/{id}")
-    public Optional<Post> getPost(@PathVariable int id) {
+    public Optional<Post> getPost(@PathVariable long id) {
         return postRepository.findById(id);
     }
 
-    @GetMapping("/posts/{id}")
-    public String setPost(Model model, @PathVariable int id) {
-        Post post = Post.of((String) model.getAttribute("postName"));
-        post.setId(Integer.parseInt((String) model.getAttribute("postId")));
-        post.setDescription((String) model.getAttribute("postDescript"));
-        post.setCreated((Calendar) model.getAttribute("postCreated"));
+    @GetMapping("/setposts/{id}")
+    public String setPost(@ModelAttribute Post post) {
+        System.out.println(post);
+        post.setCreated(Calendar.getInstance());
         postRepository.save(post);
         return "redirect:/index";
     }
 
     @GetMapping("/delete/{id}")
-    public String deletePost(@PathVariable int id, Model model) {
+    public String deletePost(@PathVariable long id, Model model) {
         postRepository.deleteById(id);
         return "redirect:/index";
     }

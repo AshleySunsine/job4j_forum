@@ -23,17 +23,19 @@
             <thead>
             <tr>
                 <th scope="col">Тема</th>
+                <th scope="col">
+                    <a href="<c:url value='/createPost'/>">Добавить пост</a>
+                </th>
             </tr>
             </thead>
             <tbody>
             <c:forEach items="${posts}" var="post">
                 <tr>
                     <td><c:out value="${post.name}"/></td>
-                    <td><c:out value="${post.description}"/>
-                        <span>
-             <a href="<c:url value='/update/${post.id}'/>">Редактировать пост</a>
-
-        </span></td>
+                    <td><c:out value="${post.description}"/></td>
+                    <td>
+                        <a href="<c:url value='/update/${post.id}'/>">Редактировать пост</a>
+                    </td>
                 </tr>
             </c:forEach>
             </tbody>
