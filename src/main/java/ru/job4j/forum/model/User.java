@@ -1,25 +1,31 @@
 package ru.job4j.forum.model;
 
 
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
+@Table(name = "user")
 public class User {
-
-    private int id;
+    @Id
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    private long id;
 
     private String password;
 
     private String username;
 
+    @ManyToOne
+    @JoinColumn(name = "authority_id")
     private Authority authority;
 
     private boolean enabled;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

@@ -1,19 +1,22 @@
 package ru.job4j.forum.model;
 
+import javax.persistence.*;
 import java.util.Objects;
 
-
+@Entity
+@Table(name = "authority")
 public class Authority {
-
-    private int id;
+     @Id
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    private long id;
 
     private String authority;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -33,12 +36,12 @@ public class Authority {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Authority authority = (Authority) o;
-        return id == authority.id;
+        Authority authority1 = (Authority) o;
+        return id == authority1.id && Objects.equals(authority, authority1.authority);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(id, authority);
     }
 }
