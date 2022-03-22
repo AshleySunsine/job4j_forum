@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.job4j.forum.model.Post;
-import ru.job4j.forum.store.PostRepository;
+import ru.job4j.forum.repositories.PostRepository;
 
 import java.util.Calendar;
 import java.util.List;
