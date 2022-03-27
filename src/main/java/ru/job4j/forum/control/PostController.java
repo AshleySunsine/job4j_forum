@@ -5,21 +5,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.job4j.forum.model.Post;
-import ru.job4j.forum.repositories.PostRepository;
+import ru.job4j.forum.service.PostService;
 
-import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 
 @Controller
-public class EditController {
+public class PostController {
     @Autowired
-    private PostRepository postRepository;
+    private PostService postRepositoryService;
 
     @PostMapping("/create")
     public String create(@ModelAttribute Post post) {
-        post.setCreated(Calendar.getInstance());
-        postRepository.save(post);
+        postRepositoryService.create(post);
         return "redirect:/index";
     }
 
@@ -30,7 +28,7 @@ public class EditController {
 
     @GetMapping("/update/{id}")
     public String update(@PathVariable long id, Model model) {
-        Post post = postRepository.findById(id).get();
+        Post post = postRepositoryService.findById(id).get();
         if (post == null) {
             return null;
         }
@@ -40,25 +38,23 @@ public class EditController {
 
     @GetMapping("/posts")
     public List<Post> getAll() {
-        return (List<Post>) postRepository.findAll();
+        return (List<Post>) postRepositoryService.getAll();
     }
 
     @GetMapping("/posts/{id}")
     public Optional<Post> getPost(@PathVariable long id) {
-        return postRepository.findById(id);
+        return postRepositoryService.findById(id);
     }
 
     @GetMapping("/setposts/{id}")
     public String setPost(@ModelAttribute Post post) {
-        System.out.println(post);
-        post.setCreated(Calendar.getInstance());
-        postRepository.save(post);
+        postRepositoryService.create(post);
         return "redirect:/index";
     }
 
     @GetMapping("/delete/{id}")
     public String deletePost(@PathVariable long id, Model model) {
-        postRepository.deleteById(id);
+        postRepositoryService.deletePost(id);
         return "redirect:/index";
     }
 }

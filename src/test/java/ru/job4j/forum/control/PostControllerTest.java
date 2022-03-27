@@ -15,7 +15,7 @@ import ru.job4j.forum.Main;
 
 @SpringBootTest(classes = Main.class)
 @AutoConfigureMockMvc
-class EditControllerTest {
+class PostControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
