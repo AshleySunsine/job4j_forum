@@ -29,7 +29,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                         + "where username = ?")
                 .authoritiesByUsernameQuery(
                         " select u.username, a.authority "
-                                + "from authorities as a, users as u "
+                                + "from authority as a, users as u "
                                 + "where u.username = ? and u.authority_id = a.id");
     }
 
@@ -41,7 +41,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/login")
+                .antMatchers("/login", "/reg")
                 .permitAll()
                 .antMatchers("/**")
                 .hasAnyRole("ADMIN", "USER")

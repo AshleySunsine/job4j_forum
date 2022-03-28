@@ -26,16 +26,14 @@ public class RegControl {
 
     @GetMapping("/reg")
     public String regPage() {
-        System.out.println("reg2");
-        return "redirect:/reg";
+        return "/reg";
     }
 
     @PostMapping("/reg")
     public String regSave(@ModelAttribute User user) {
-        System.out.println("reg1");
         user.setEnabled(true);
         user.setPassword(encoder.encode(user.getPassword()));
-        user.setAuthority(authorities.findByAuthority("ROLE_USER"));
+        user.setAuthority(authorities.findByAuthority("USER"));
         users.save(user);
         return "redirect:/login";
     }

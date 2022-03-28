@@ -7,9 +7,7 @@ import ru.job4j.forum.repositories.PostRepository;
 
 @Controller
 public class IndexControl {
-
     private final PostRepository posts;
-
     public IndexControl(PostRepository posts) {
         this.posts = posts;
     }
