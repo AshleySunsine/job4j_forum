@@ -48,7 +48,7 @@ public class PostController {
 
     @GetMapping("/setposts/{id}")
     public String setPost(@ModelAttribute Post post) {
-        postRepositoryService.create(post);
+        postRepositoryService.setPost(post);
         return "redirect:/index";
     }
 
