@@ -33,7 +33,7 @@ public class RegControl {
     public String regSave(@ModelAttribute User user) {
         user.setEnabled(true);
         user.setPassword(encoder.encode(user.getPassword()));
-        user.setAuthority(authorities.findByAuthority("USER"));
+        user.setAuthority(authorities.findByAuthority("ROLE_USER"));
         users.save(user);
         return "redirect:/login";
     }
