@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import ru.job4j.forum.model.User;
-import ru.job4j.forum.repositories.AuthorityRepository;
+import ru.job4j.forum.repositories.AuthoritiesRepository;
 import ru.job4j.forum.repositories.UserRepository;
 
 @Controller
@@ -16,9 +16,9 @@ public class RegControl {
     private final PasswordEncoder encoder;
 
     private final UserRepository users;
-    private final AuthorityRepository authorities;
+    private final AuthoritiesRepository authorities;
 
-    public RegControl(PasswordEncoder encoder, UserRepository users, AuthorityRepository authorities) {
+    public RegControl(PasswordEncoder encoder, UserRepository users, AuthoritiesRepository authorities) {
         this.encoder = encoder;
         this.users = users;
         this.authorities = authorities;
